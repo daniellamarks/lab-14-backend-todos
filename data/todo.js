@@ -7,14 +7,14 @@ export default [
     userName: 'Chris' // only on GETs
   },
   {
-    task: 'wash the dishes',
+    task: 'mop the floors',
     completed: false,
     shared: false,
     userId: 4,
     userName: 'Chris' // only on GETs
-  }, 
+  },
   {
-    task: 'wash the dishes',
+    task: 'dust some stuff',
     completed: false,
     shared: false,
     userId: 4,
