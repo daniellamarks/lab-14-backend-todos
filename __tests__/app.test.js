@@ -36,17 +36,17 @@ describe('API Routes', () => {
       task: 'wash the dishes',
       completed: false,
       shared: false,
-      userId: 4,
+      userId: 1,
       userName: 'Chris'
-    }
+    };
     // append the token to your requests:
     //  .set('Authorization', user.token);
 
-    it('POST todo /api/todo', async () => {
+    it('POST todos /api/todo', async () => {
 
       const response = await request
-        .post('/api/todo')
-        .set('Authorization, user.token')
+        .post('/api/todos')
+        .set('Authorization', user.token)
         .send(expectedToDos);
 
       expect(response.status).toBe(200);
