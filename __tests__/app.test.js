@@ -28,7 +28,7 @@ describe('API Routes', () => {
       expect(response.status).toBe(200);
 
       user = response.body;
-      console.log(user)
+    
     });
 
 
@@ -63,7 +63,7 @@ describe('API Routes', () => {
 
 
     it('GET my /api/me/todos only return my todos', async () => {
-      console.log(expectedToDos);
+      
       const response = await request
       //fetching what is displayed on the front end
         .get('/api/me/todos')
