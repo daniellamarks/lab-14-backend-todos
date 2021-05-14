@@ -36,17 +36,17 @@ describe('API Routes', () => {
       task: 'wash the dishes',
       completed: false,
       shared: false,
-      userId: 4,
+      userId: 1,
       userName: 'Chris'
-    }
+    };
     // append the token to your requests:
     //  .set('Authorization', user.token);
 
-    it('POST todo /api/todo', async () => {
+    it('POST todos /api/todo', async () => {
 
       const response = await request
-        .post('/api/todo')
-        .set('Authorization, user.token')
+        .post('/api/todos')
+        .set('Authorization', user.token)
         .send(expectedToDos);
 
       expect(response.status).toBe(200);
@@ -60,6 +60,28 @@ describe('API Routes', () => {
       // expect(response.status).toBe(200);
       // expect(response.body).toEqual(?);
     });
+
+
+    it.only('GET my /api/me/todos only return my todos', async () => {
+
+      const response = await request.get('api/me/todos')
+        .set('Authorization', user.token);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual([todos]);
+    });
+
+    it('PUT updated todo to /api/todos/:id', async () => {
+
+      expectedTodos.completed = true;
+      const response = await request
+        .put(`/api/todos/${expectedToDos.id}`)
+        .set('Authorization', user.token)
+        .send(expectedToDos);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expectedToDos);
+    })
 
   });
 });
