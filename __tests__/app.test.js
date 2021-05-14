@@ -28,6 +28,7 @@ describe('API Routes', () => {
       expect(response.status).toBe(200);
 
       user = response.body;
+      console.log(user)
     });
 
 
@@ -36,7 +37,6 @@ describe('API Routes', () => {
       task: 'wash the dishes',
       completed: false,
       shared: false,
-      userId: 1,
       userName: 'Chris'
     };
     // append the token to your requests:
@@ -55,25 +55,34 @@ describe('API Routes', () => {
         ...expectedToDos
       });
 
-
+      //this line is for post requests
       expectedToDos = response.body;
-      // expect(response.status).toBe(200);
-      // expect(response.body).toEqual(?);
+      
+
     });
 
 
-    it.only('GET my /api/me/todos only return my todos', async () => {
-
-      const response = await request.get('api/me/todos')
+    it('GET my /api/me/todos only return my todos', async () => {
+      console.log(expectedToDos);
+      const response = await request
+      //fetching what is displayed on the front end
+        .get('/api/me/todos')
+        //token is what gets returned after you sign up/sign in
         .set('Authorization', user.token);
 
+      // expectedTodos = response.body;
+
       expect(response.status).toBe(200);
-      expect(response.body).toEqual([todos]);
+      expect(response.body).toEqual([expectedToDos]);
+
+      
     });
+
 
     it('PUT updated todo to /api/todos/:id', async () => {
 
-      expectedTodos.completed = true;
+      expectedToDos.completed = true;
+
       const response = await request
         .put(`/api/todos/${expectedToDos.id}`)
         .set('Authorization', user.token)
@@ -81,7 +90,7 @@ describe('API Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(expectedToDos);
-    })
+    });
 
   });
 });
