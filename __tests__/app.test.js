@@ -62,7 +62,7 @@ describe('API Routes', () => {
     });
 
 
-    it.only('GET my /api/me/todos only return my todos', async () => {
+    it('GET my /api/me/todos only return my todos', async () => {
 
       const response = await request.get('api/me/todos')
         .set('Authorization', user.token);
@@ -71,9 +71,10 @@ describe('API Routes', () => {
       expect(response.body).toEqual([todos]);
     });
 
-    it('PUT updated todo to /api/todos/:id', async () => {
+    it('PUT updated todo to /api/todos/:id/completed', async () => {
 
       expectedTodos.completed = true;
+      expectedToDos.task = 'wash the dishes';
       const response = await request
         .put(`/api/todos/${expectedToDos.id}`)
         .set('Authorization', user.token)
@@ -81,7 +82,7 @@ describe('API Routes', () => {
 
       expect(response.status).toBe(200);
       expect(response.body).toEqual(expectedToDos);
-    })
+    });
 
   });
 });
