@@ -61,5 +61,27 @@ describe('API Routes', () => {
       // expect(response.body).toEqual(?);
     });
 
+
+    it.only('GET my /api/me/todos only return my todos', async () => {
+
+      const response = await request.get('api/me/todos')
+        .set('Authorization', user.token);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual([todos]);
+    });
+
+    it('PUT updated todo to /api/todos/:id', async () => {
+
+      expectedTodos.completed = true;
+      const response = await request
+        .put(`/api/todos/${expectedToDos.id}`)
+        .set('Authorization', user.token)
+        .send(expectedToDos);
+
+      expect(response.status).toBe(200);
+      expect(response.body).toEqual(expectedToDos);
+    })
+
   });
 });
